@@ -1,16 +1,34 @@
 // 1. have a bug
-const { sum, subtract } = require("./math");
+const { sum, subtract } = require("../math");
 
-let result = sum(3, 7);
-let expected = 10;
+let result, expected;
 
-// 2. throw error when result is unexpected
-expect(result).toBe(expected);
+function sumTest() {
+  result = sum(3, 7);
+  expected = 10;
+  expect(result).toBe(expected);
+}
 
-result = subtract(result, expected);
-expected = 4;
+test("sum adds numbers", sumTest);
 
-expect(result).toBe(expected);
+function subtractTest() {
+  result = subtract(7, 3);
+  expected = 4;
+  expect(result).toBe(expected);
+}
+
+test("subtract subtracts numbers", subtractTest);
+
+function test(title, callback) {
+  try {
+    callback();
+    console.log(`✅ ${title}`);
+  } catch (error) {
+    console.error(`❌ ${title}`);
+    console.error(error);
+  }
+}
+
 
 /**
  * @description
